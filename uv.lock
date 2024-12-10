@@ -1627,17 +1627,17 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "faiss-cpu", specifier = ">=1.9.0.post1" },
-    { name = "google-generativeai", specifier = ">=0.8.3" },
-    { name = "langchain", specifier = ">=0.3.10" },
-    { name = "langchain-community" },
-    { name = "langchain-core" },
+    { name = "faiss-cpu", specifier = ">=1.7.4" },
+    { name = "google-generativeai", specifier = ">=0.3.1" },
+    { name = "langchain", specifier = ">=0.0.350" },
+    { name = "langchain-community", specifier = ">=0.0.10" },
+    { name = "langchain-core", specifier = ">=0.0.10" },
     { name = "langchain-google", specifier = ">=0.1.1" },
-    { name = "langchain-google-genai", specifier = ">=0.3.22" },
+    { name = "langchain-google-genai", specifier = ">=0.0.5" },
     { name = "langchain-openai", specifier = ">=0.2.12" },
     { name = "openai", specifier = ">=1.57.1" },
-    { name = "pypdf2", specifier = ">=3.0.1" },
-    { name = "streamlit", specifier = ">=1.40.2" },
+    { name = "pypdf2", specifier = ">=3.0.0" },
+    { name = "streamlit", specifier = ">=1.28.0" },
 ]
 
 [[package]]

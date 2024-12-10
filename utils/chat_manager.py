@@ -65,8 +65,9 @@ class ChatManager:
             
             return result["answer"]
         except Exception as e:
-            st.error(f"Error generating response: {str(e)}")
-            return "I encountered an error while processing your question. Please try asking in a different way or upload a different document if the issue persists."
+            error_msg = f"Error generating response: {str(e)}"
+            st.error(error_msg)
+            raise Exception(error_msg)
 
     @staticmethod
     def format_chat_history(messages: List[Dict]) -> List[tuple]:
