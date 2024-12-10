@@ -1,7 +1,7 @@
 from typing import List, Dict
 import streamlit as st
 from langchain_community.vectorstores import FAISS
-from langchain_community.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain
 from config import EMBEDDING_MODEL, CHAT_MODEL, VECTOR_STORE_SIMILARITY_SEARCH_K
 
 class ChatManager:

@@ -1,6 +1,6 @@
 import os
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
 
 # Configuration settings
 ALLOWED_EXTENSIONS = ['.pdf', '.txt']
