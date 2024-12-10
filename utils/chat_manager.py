@@ -3,7 +3,7 @@ import streamlit as st
 from langchain_community.vectorstores import FAISS
 from langchain.chains.conversational_retrieval.base import ConversationalRetrievalChain
 from langchain.prompts import PromptTemplate
-from config import EMBEDDING_MODEL, CHAT_MODEL, VECTOR_STORE_SIMILARITY_SEARCH_K
+from config import VECTOR_STORE_SIMILARITY_SEARCH_K, get_llm_config
 
 class ChatManager:
     def __init__(self):
@@ -39,8 +39,9 @@ class ChatManager:
 
         CUSTOM_PROMPT = PromptTemplate.from_template(prompt_template)
         
+        models = get_llm_config(self.current_provider)
         self.chat_chain = ConversationalRetrievalChain.from_llm(
-            llm=CHAT_MODEL,
+            llm=models["chat_model"],
             retriever=self.vector_store.as_retriever(
                 search_kwargs={
                     "k": VECTOR_STORE_SIMILARITY_SEARCH_K,
