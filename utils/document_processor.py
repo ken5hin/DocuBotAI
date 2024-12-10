@@ -2,7 +2,7 @@ import PyPDF2
 from typing import List, Tuple
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_core.documents import Document
 import io
 import os
 from config import ALLOWED_EXTENSIONS, MAX_FILE_SIZE
