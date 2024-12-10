@@ -18,17 +18,20 @@ def clear_chat_history():
 
 def main():
     st.set_page_config(
-        page_title="Document Chat Assistant",
+        page_title="ACCA Knowledge Assistant",
         page_icon="💬",
         layout="wide"
     )
 
     initialize_session_state()
 
-    st.title("📚 Document Chat Assistant")
+    st.title("📚 ACCA Knowledge Assistant")
 
     # Sidebar for model selection and document upload
     with st.sidebar:
+        # Add ACCA logo at the top
+        st.image("image.png", width=150, use_column_width=False)
+        
         st.header("Settings")
         
         # Model selection
