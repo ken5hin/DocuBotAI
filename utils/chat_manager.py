@@ -15,15 +15,23 @@ class ChatManager:
         self.vector_store = FAISS.from_documents(documents, EMBEDDING_MODEL)
         
         # Create a custom prompt template
-        prompt_template = """You are a helpful AI assistant that answers questions based on the provided document context.
-        Use the following pieces of context to answer the question at the end.
-        If you don't know the answer based on the context, explain what information you would need to provide a better answer.
-        
-        Context: {context}
-        
-        Chat History: {chat_history}
-        Human: {question}
-        Assistant: Let me help you with that question. """
+        prompt_template = """You are a helpful AI assistant analyzing documents. Your task is to provide accurate answers based on the given document content.
+
+        Here is the relevant context from the document:
+        {context}
+
+        Previous conversation:
+        {chat_history}
+
+        Current question: {question}
+
+        Instructions:
+        1. Use ONLY the information from the provided context to answer the question
+        2. If the context doesn't contain enough information, explain specifically what's missing
+        3. Be concise but thorough in your response
+        4. If you quote from the document, use the exact words
+
+        Assistant: Based on the document content, """
 
         CUSTOM_PROMPT = PromptTemplate.from_template(prompt_template)
         
@@ -32,7 +40,7 @@ class ChatManager:
             retriever=self.vector_store.as_retriever(
                 search_kwargs={
                     "k": VECTOR_STORE_SIMILARITY_SEARCH_K,
-                    "score_threshold": 0.5
+                    "score_threshold": 0.3
                 }
             ),
             combine_docs_chain_kwargs={"prompt": CUSTOM_PROMPT},

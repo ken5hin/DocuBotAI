@@ -10,9 +10,10 @@ from config import ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 class DocumentProcessor:
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=200,
-            length_function=len
+            chunk_size=500,
+            chunk_overlap=50,
+            length_function=len,
+            separators=["\n\n", "\n", " ", ""]
         )
 
     def validate_file(self, file) -> Tuple[bool, str]:
@@ -55,4 +56,13 @@ class DocumentProcessor:
 
     def process_text(self, text: str) -> List[Document]:
         """Split text into chunks and create documents"""
-        return self.text_splitter.create_documents([text])
+        if not text.strip():
+            raise ValueError("Empty document content")
+        
+        documents = self.text_splitter.create_documents([text])
+        if not documents:
+            raise ValueError("No documents created after processing")
+            
+        # Add logging to verify document content
+        st.info(f"Processed {len(documents)} document chunks")
+        return documents
