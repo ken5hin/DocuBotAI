@@ -80,8 +80,8 @@ def main():
             # Generate and display assistant response
             with st.chat_message("assistant"):
                 message_placeholder = st.empty()
-                try:
-                    with st.spinner("Thinking..."):
+                with st.spinner("Thinking..."):
+                    try:
                         chat_history = ChatManager.format_chat_history(
                             st.session_state.messages[:-1]
                         )
@@ -92,13 +92,12 @@ def main():
                         st.session_state.messages.append(
                             {"role": "assistant", "content": response}
                         )
-                except Exception as e:
-                    error_message = f"Error: {str(e)}\nPlease make sure you have uploaded a document and try again."
-                    message_placeholder.error(error_message)
-                    st.error("Detailed error information has been logged for debugging.")
-                    st.session_state.messages.append(
-                        {"role": "assistant", "content": error_message}
-                    )
+                    except Exception as e:
+                        error_message = f"Error generating response: {str(e)}"
+                        message_placeholder.error(error_message)
+                        st.session_state.messages.append(
+                            {"role": "assistant", "content": error_message}
+                        )
 
 if __name__ == "__main__":
     main()

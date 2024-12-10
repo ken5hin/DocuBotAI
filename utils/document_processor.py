@@ -10,11 +10,10 @@ from config import ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 class DocumentProcessor:
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=100,
+            chunk_size=500,
+            chunk_overlap=50,
             length_function=len,
-            separators=["\n\n", "\n", ".", " ", ""],
-            is_separator_regex=False
+            separators=["\n\n", "\n", " ", ""]
         )
 
     def validate_file(self, file) -> Tuple[bool, str]:
@@ -66,9 +65,4 @@ class DocumentProcessor:
             
         # Add logging to verify document content
         st.info(f"Processed {len(documents)} document chunks")
-        
-        # Debug logging for document content
-        for i, doc in enumerate(documents):
-            st.debug(f"Chunk {i+1} (length: {len(doc.page_content)}): {doc.page_content[:100]}...")
-            
         return documents

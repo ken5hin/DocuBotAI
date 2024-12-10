@@ -15,24 +15,23 @@ class ChatManager:
         self.vector_store = FAISS.from_documents(documents, EMBEDDING_MODEL)
         
         # Create a custom prompt template
-        prompt_template = """You are an expert AI assistant analyzing documents. Use the following context from the document to answer questions accurately and informatively.
+        prompt_template = """You are a helpful AI assistant analyzing documents. Your task is to provide accurate answers based on the given document content.
 
-        Context from document:
+        Here is the relevant context from the document:
         {context}
 
-        Chat history:
+        Previous conversation:
         {chat_history}
 
-        Human question: {question}
+        Current question: {question}
 
         Instructions:
-        1. Analyze the context thoroughly and provide a detailed answer
-        2. If you find the relevant information in the context, explain it clearly
-        3. If specific information is missing from the context, say exactly what information is missing
-        4. Use direct quotes from the document when relevant, citing the exact text
-        5. Stay focused on the question and provide specific, not generic responses
+        1. Use ONLY the information from the provided context to answer the question
+        2. If the context doesn't contain enough information, explain specifically what's missing
+        3. Be concise but thorough in your response
+        4. If you quote from the document, use the exact words
 
-        Assistant: Let me analyze the document content carefully. """
+        Assistant: Based on the document content, """
 
         CUSTOM_PROMPT = PromptTemplate.from_template(prompt_template)
         
@@ -65,9 +64,8 @@ class ChatManager:
             
             return result["answer"]
         except Exception as e:
-            error_msg = f"Error generating response: {str(e)}"
-            st.error(error_msg)
-            raise Exception(error_msg)
+            st.error(f"Error generating response: {str(e)}")
+            return "I encountered an error while processing your question. Please try asking in a different way or upload a different document if the issue persists."
 
     @staticmethod
     def format_chat_history(messages: List[Dict]) -> List[tuple]:
