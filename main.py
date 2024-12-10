@@ -27,8 +27,17 @@ def main():
 
     st.title("📚 Document Chat Assistant")
 
-    # Sidebar for document upload and controls
+    # Sidebar for model selection and document upload
     with st.sidebar:
+        st.header("Settings")
+        
+        # Model selection
+        model_provider = st.selectbox(
+            "Select LLM Provider",
+            options=["gemini", "openai"],
+            key="model_provider"
+        )
+        
         st.header("Document Upload")
         uploaded_file = st.file_uploader(
             "Upload your document (PDF or TXT)",
@@ -50,7 +59,10 @@ def main():
                 try:
                     text = st.session_state.document_processor.extract_text(uploaded_file)
                     documents = st.session_state.document_processor.process_text(text)
-                    st.session_state.chat_manager.initialize_vector_store(documents)
+                    st.session_state.chat_manager.initialize_vector_store(
+                        documents,
+                        provider=st.session_state.model_provider
+                    )
                     st.success("Document processed successfully!")
                 except Exception as e:
                     st.error(f"Error processing document: {str(e)}")

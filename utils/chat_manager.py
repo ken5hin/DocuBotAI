@@ -9,10 +9,14 @@ class ChatManager:
     def __init__(self):
         self.vector_store = None
         self.chat_chain = None
+        self.current_provider = None
         
-    def initialize_vector_store(self, documents: List):
+    def initialize_vector_store(self, documents: List, provider="gemini"):
         """Initialize FAISS vector store with documents"""
-        self.vector_store = FAISS.from_documents(documents, EMBEDDING_MODEL)
+        if self.current_provider != provider:
+            self.current_provider = provider
+            models = get_llm_config(provider)
+            self.vector_store = FAISS.from_documents(documents, models["embedding_model"])
         
         # Create a custom prompt template
         prompt_template = """You are a helpful AI assistant analyzing documents. Your task is to provide accurate answers based on the given document content.
