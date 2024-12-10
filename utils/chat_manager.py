@@ -15,23 +15,24 @@ class ChatManager:
         self.vector_store = FAISS.from_documents(documents, EMBEDDING_MODEL)
         
         # Create a custom prompt template
-        prompt_template = """You are a helpful AI assistant analyzing documents. Your task is to provide accurate answers based on the given document content.
+        prompt_template = """You are an expert AI assistant analyzing documents. Use the following context from the document to answer questions accurately and informatively.
 
-        Here is the relevant context from the document:
+        Context from document:
         {context}
 
-        Previous conversation:
+        Chat history:
         {chat_history}
 
-        Current question: {question}
+        Human question: {question}
 
         Instructions:
-        1. Use ONLY the information from the provided context to answer the question
-        2. If the context doesn't contain enough information, explain specifically what's missing
-        3. Be concise but thorough in your response
-        4. If you quote from the document, use the exact words
+        1. Analyze the context thoroughly and provide a detailed answer
+        2. If you find the relevant information in the context, explain it clearly
+        3. If specific information is missing from the context, say exactly what information is missing
+        4. Use direct quotes from the document when relevant, citing the exact text
+        5. Stay focused on the question and provide specific, not generic responses
 
-        Assistant: Based on the document content, """
+        Assistant: Let me analyze the document content carefully. """
 
         CUSTOM_PROMPT = PromptTemplate.from_template(prompt_template)
         

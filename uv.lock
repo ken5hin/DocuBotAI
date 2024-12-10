@@ -814,6 +814,15 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-google"
+version = "0.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/1f/ebe6c01c42834dcff005ee71593cc6b6fcccc17e91ce93221b47bd8ac34c/langchain_google-0.1.1.tar.gz", hash = "sha256:bb179bdda23dc6c274cecdc2c026c06fcbdbe93b1adc984fd23c6d0a8b83cad3", size = 638 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0f/0d/a11e96915473c84310def14fa65dde2f7535e4a02b18c18d777ea7ff9752/langchain_google-0.1.1-py3-none-any.whl", hash = "sha256:1db3a6c54f78533129e46fef0dabda2d43bdefc0d1b88f816276d0e3bbaa5004", size = 1104 },
+]
+
+[[package]]
 name = "langchain-google-genai"
 version = "2.0.6"
 source = { registry = "https://pypi.org/simple" }
@@ -1608,6 +1617,7 @@ dependencies = [
     { name = "langchain" },
     { name = "langchain-community" },
     { name = "langchain-core" },
+    { name = "langchain-google" },
     { name = "langchain-google-genai" },
     { name = "langchain-openai" },
     { name = "openai" },
@@ -1622,6 +1632,7 @@ requires-dist = [
     { name = "langchain", specifier = ">=0.3.10" },
     { name = "langchain-community" },
     { name = "langchain-core" },
+    { name = "langchain-google", specifier = ">=0.1.1" },
     { name = "langchain-google-genai", specifier = ">=0.3.22" },
     { name = "langchain-openai", specifier = ">=0.2.12" },
     { name = "openai", specifier = ">=1.57.1" },
