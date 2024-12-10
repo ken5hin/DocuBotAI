@@ -30,7 +30,7 @@ def main():
     # Sidebar for model selection and document upload
     with st.sidebar:
         # Add ACCA logo at the top
-        st.image("image.png", width=150, use_column_width=False)
+        st.image("image.png", width=100, use_column_width=False)
         
         st.header("Settings")
         
